@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For My Love ❤️</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif}
+body{
+  background:radial-gradient(circle at top,#2b0036,#000);
+  height:100vh;overflow:hidden;color:#fff;text-align:center
+}
+.glow{
+  color:#ffb6ff;
+  text-shadow:0 0 10px #ff4fd8,0 0 25px #ff4fd8,0 0 50px #ff1fc8
+}
+.screen{
+  position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  width:100%;padding:20px;display:none
+}
+.screen.active{display:block}
+button{
+  background:linear-gradient(45deg,#ff2fa0,#ff77d9);
+  border:none;padding:15px 35px;font-size:1.1rem;
+  border-radius:40px;color:white;cursor:pointer;
+  box-shadow:0 0 20px #ff4fd8
+}
+
+/* Hearts */
+.heart{
+  position:fixed;bottom:-20px;font-size:18px;
+  animation:floatUp 6s linear infinite;color:#ff4fa3
+}
+@keyframes floatUp{
+  0%{transform:translateY(0);opacity:1}
+  100%{transform:translateY(-100vh);opacity:0}
+}
+
+/* Fireworks */
+canvas{position:fixed;top:0;left:0;z-index:-1}
+
+/* Photos */
+.photos img{
+  width:140px;height:180px;object-fit:cover;
+  border-radius:15px;margin:8px;
+  box-shadow:0 0 20px rgba(255,105,180,.7)
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="fire"></canvas>
+
+<!-- SCREEN 1 -->
+<div class="screen active" id="s1">
+  <h1 class="glow">🎆 Happy New Year Babay ❤️ 🎆</h1><br>
+  <p>Thank you for coming into my life.<br>I Love You so much Babay ❤️</p><br>
+  <button onclick="go2()">Tap Here 💓</button>
+</div>
+
+<!-- SCREEN 2 -->
+<div class="screen" id="s2">
+  <h1 class="glow">Rakesh ❤️</h1><br>
+  <p id="typeText" style="line-height:1.8;font-size:1.1rem"></p>
+</div>
+
+<!-- SCREEN 3 -->
+<div class="screen" id="s3">
+  <h1 class="glow">Beautiful Moments 💖</h1><br>
+  <div class="photos">
+    <img src="photo1.jpg">
+    <img src="photo2.jpg">
+    <img src="photo3.jpg">
+    <img src="photo4.jpg">
+  </div>
+  <p style="margin-top:20px">
+    Every picture holds a memory,<br>
+    every memory holds my heart ❤️
+  </p>
+</div>
+
+<!-- SCREEN 4 -->
+<div class="screen" id="s4">
+  <h1 class="glow">Happy 2026, My Love 💫</h1><br>
+  <p>
+    Happy 2026, my love! I can't wait to live more special moments together 💖.<br>
+    You are my best gift and my wish fulfilled.<br>
+    May this 2026 bring us more love and magical moments 💫<br><br>
+    <b>I LOVE YOU SO MUCH BABAY ❤️</b><br><br>
+    Meri zindagi me aane ke liye shukriya,<br>
+    mai hamesha tumhare saath rahunga 🌙
+  </p>
+</div>
+
+<script>
+/* Hearts */
+setInterval(()=>{
+  let h=document.createElement("div");
+  h.className="heart";h.innerHTML="❤️";
+  h.style.left=Math.random()*100+"vw";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),6000);
+},400);
+
+/* Fireworks */
+const c=document.getElementById("fire"),x=c.getContext("2d");
+function resize(){c.width=innerWidth;c.height=innerHeight}
+resize();window.onresize=resize;
+setInterval(()=>{
+  for(let i=0;i<5;i++){
+    x.beginPath();
+    x.arc(Math.random()*c.width,Math.random()*c.height/2,3,0,Math.PI*2);
+    x.fillStyle=`hsl(${Math.random()*360},100%,60%)`;
+    x.fill();
+  }
+},1000);
+
+/* Screen change */
+function go2(){
+  s1.classList.remove("active");
+  s2.classList.add("active");
+  typeWriter();
+}
+
+/* Typewriter */
+const lines=[
+"You have a beautiful smile ❤️",
+"Your laugh is infectious ✨",
+"You always light up a room 🌟",
+"I love your style 💕",
+"You're so intelligent 🫶",
+"You make my world better 🌍",
+"I am so lucky to have you 💖"
+];
+let l=0,cI=0;
+function typeWriter(){
+  if(l<lines.length){
+    if(cI<lines[l].length){
+      typeText.innerHTML+=lines[l].charAt(cI);
+      cI++;setTimeout(typeWriter,60);
+    }else{
+      typeText.innerHTML+="<br><br>";
+      cI=0;l++;setTimeout(typeWriter,400);
+    }
+  }else{
+    setTimeout(()=>{
+      s2.classList.remove("active");
+      s3.classList.add("active");
+      setTimeout(()=>{
+        s3.classList.remove("active");
+        s4.classList.add("active");
+      },6000);
+    },2000);
+  }
+}
+</script>
+
+</body>
+</html>
